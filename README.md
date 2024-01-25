@@ -1,39 +1,59 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flutter Link Previewer
+Customizable link and URL preview extracted from the provided text with the ability to render from the cache. Ideal for chat applications.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+<img src="https://user-images.githubusercontent.com/14123304/193461843-6ec34142-dc2a-428d-9b11-9b3a35f265c6.png" width="430" height="932">
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+## Getting Started
 
 ```dart
-const like = 'sample';
+import 'package:flutter_link_preview_2/flutter_link_preview_2.dart';
+
+@LinkPreview(
+  enableAnimation: true,
+  onPreviewDataFetched: (data) {
+    setState(() {
+      // Save preview data to the state              
+    });
+  },
+  previewData: _previewData, // Pass the preview data from the state
+  text: 'https://flyer.chat',
+  width: MediaQuery.of(context).size.width,
+)
 ```
 
-## Additional information
+## Customization
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+final style = TextStyle(
+  color: Colors.red,
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+  height: 1.375,
+);
+
+
+@LinkPreview(
+  linkStyle: style,
+  metadataTextStyle: style.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+  ),
+  metadataTitleStyle: style.copyWith(
+    fontWeight: FontWeight.w800,
+  ),
+  padding: EdgeInsets.symmetric(
+    horizontal: 24,
+    vertical: 16,
+  ),
+  onPreviewDataFetched: _onPreviewDataFetched,
+  previewData: _previewData,
+  text: 'https://flyer.chat',
+  textStyle: style,
+  width: width,
+)
+```
+
+## License
+
+[MIT](LICENSE)
