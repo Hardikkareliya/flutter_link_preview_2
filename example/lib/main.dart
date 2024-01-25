@@ -28,10 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Map<String, PreviewData> datas = {};
 
   List<String> get urls => const [
-        'https://updeed.co',
-        'https://links.updeed.co/share/6AYD',
-        'https://updeed.co/inclusive-education-changemakers-breaking-down-barriers-to-learning',
-        'https://updeed.co/about-us/',
+        'https://google.com',
       ];
 
   @override
@@ -70,6 +67,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 previewData: datas[urls[index]],
                 text: urls[index],
                 width: MediaQuery.of(context).size.width,
+                loadingIndecator: Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(vertical: 10.0),
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Center(child: CircularProgressIndicator()),
+                ),
               ),
             ),
           ),

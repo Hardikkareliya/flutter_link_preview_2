@@ -36,6 +36,7 @@ class LinkPreview extends StatefulWidget {
     this.textStyle,
     this.textWidget,
     this.userAgent,
+    this.loadingIndecator,
     required this.width,
   });
 
@@ -111,6 +112,7 @@ class LinkPreview extends StatefulWidget {
 
   /// Width of the [LinkPreview] widget.
   final double width;
+  final Widget? loadingIndecator;
 
   @override
   State<LinkPreview> createState() => _LinkPreviewState();
@@ -200,41 +202,43 @@ class _LinkPreviewState extends State<LinkPreview>
     return Container(
       constraints: BoxConstraints(maxWidth: widget.width),
       padding: withPadding ? padding : null,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: withPadding
-                ? EdgeInsets.zero
-                : EdgeInsets.only(
-                    left: padding.left,
-                    right: padding.right,
-                    top: padding.top,
-                    bottom: _hasOnlyImage() ? 0 : 16,
-                  ),
-            child: Column(
+      child: isFetchingPreviewData&&widget.loadingIndecator!=null
+          ? widget.loadingIndecator
+          : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (widget.header != null)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 6),
-                    child: Text(
-                      widget.header!,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: widget.headerStyle,
-                    ),
+                Padding(
+                  padding: withPadding
+                      ? EdgeInsets.zero
+                      : EdgeInsets.only(
+                          left: padding.left,
+                          right: padding.right,
+                          top: padding.top,
+                          bottom: _hasOnlyImage() ? 0 : 16,
+                        ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (widget.header != null)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 6),
+                          child: Text(
+                            widget.header!,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: widget.headerStyle,
+                          ),
+                        ),
+                      widget.textWidget ?? _linkify(),
+                      if (withPadding && child != null)
+                        shouldAnimate ? _animated(child) : child,
+                    ],
                   ),
-                widget.textWidget ?? _linkify(),
-                if (withPadding && child != null)
+                ),
+                if (!withPadding && child != null)
                   shouldAnimate ? _animated(child) : child,
               ],
             ),
-          ),
-          if (!withPadding && child != null)
-            shouldAnimate ? _animated(child) : child,
-        ],
-      ),
     );
   }
 
