@@ -1,0 +1,26 @@
+name: flutter_link_preview_2
+description: A new Flutter project.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_chat_types: ^3.4.3
+  flutter_linkify: ^5.0.2
+  html: ^0.15.0
+#  http: ^0.13.5
+  dio:
+  linkify: ^4.1.0
+  meta: ^1.7.0
+  url_launcher: ^6.1.5
+
+dev_dependencies:
+  dart_code_metrics: ^4.15.2
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
